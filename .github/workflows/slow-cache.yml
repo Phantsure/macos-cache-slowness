@@ -1,0 +1,28 @@
+name: Slow cache
+on: [workflow_dispatch, push]
+
+jobs:
+  generate:
+    name: Generate
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Add Specs repository
+        run: pod repo add cocoapods https://github.com/CocoaPods/Specs.git
+
+      - uses: actions/cache@v3
+        with:
+          path: ~/.cocoapods/repos/cocoapods
+          key: ${{ runner.os }}-cocoapods-specs
+
+  restore:
+    name: Restore
+    needs: generate
+    runs-on: macos-12
+    steps:
+      - name: restore cached large file
+        uses: actions/cache@v3
+        with:
+          path: ~/.cocoapods/repos/cocoapods
+          key: ${{ runner.os }}-cocoapods-specs
