@@ -1,0 +1,16 @@
+name: Slow decompression
+on: [workflow_dispatch, push]
+
+jobs:
+  decompression:
+    name: Decompression
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Download and decompress
+        run: |
+          wget "https://api.github.com/repos/CocoaPods/Specs/tarball/master" -O /tmp/cocoapods.tar.gz
+          mkdir -p ~/.cocoapods/repos/master
+          gtar xzf /tmp/cocoapods.tar.gz -C ~/.cocoapods/repos/master --strip-components=1
+
