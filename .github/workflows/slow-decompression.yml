@@ -12,5 +12,5 @@ jobs:
         run: |
           wget "https://api.github.com/repos/CocoaPods/Specs/tarball/master" -O /tmp/cocoapods.tar.gz
           mkdir -p ~/.cocoapods/repos/master
-          gtar xzf /tmp/cocoapods.tar.gz -C ~/.cocoapods/repos/master --strip-components=1
+          time gtar xzf /tmp/cocoapods.tar.gz -C ~/.cocoapods/repos/master --strip-components=1
 
