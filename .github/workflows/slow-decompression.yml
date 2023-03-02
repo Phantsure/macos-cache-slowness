@@ -1,5 +1,5 @@
 name: Slow decompression
-on: [workflow_dispatch, push]
+on: [workflow_dispatch]
 
 jobs:
   decompression:
@@ -15,3 +15,6 @@ jobs:
           time gtar xzf /tmp/cocoapods.tar.gz -C ~/cocoapods_gtar --strip-components=1
           mkdir -p ~/cocoapods_tar
           time tar xzf /tmp/cocoapods.tar.gz -C ~/cocoapods_tar --strip-components=1
+          mkdir -p ~/cocoapods_zip
+          time zip -qr cache.zip ~/cocoapods_gtar
+          time unzip cache.zip -d ~/cocoapods_zip
