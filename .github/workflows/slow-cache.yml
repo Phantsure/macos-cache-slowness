@@ -10,7 +10,7 @@ jobs:
 
       - name: Add Specs repository
         run: |
-          gem install cocoapods
+          sudo gem install cocoapods
           pod repo add cocoapods https://github.com/CocoaPods/Specs.git
 
       - run: |
